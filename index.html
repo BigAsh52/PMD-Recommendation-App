@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Basic or HDHP? — Pre-Med Defender pairing guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy-900:#181d49;
+    --navy-700:#0D2D5E;
+    --cyan-500:#149dd7;
+    --cyan-400:#1AAFE6;
+    --sky-300:#8aceeb;
+    --paper:#f6f8fc;
+    --paper-2:#ffffff;
+    --ink:#141a3d;
+    --ink-soft:#4a5578;
+    --line: rgba(20,26,61,0.10);
+    --warn-bg: #fff4e8;
+    --warn-line: #e8a253;
+    --warn-ink: #7a4a10;
+    --good-bg: #eaf7ee;
+    --good-line: #59b382;
+    --good-ink: #1e5c39;
+    --shadow: 0 20px 50px -20px rgba(13,45,94,0.35);
+  }
+  :root:not([data-theme="light"]) {
+    @media (prefers-color-scheme: dark){
+      --paper:#0e1330;
+      --paper-2:#151b3d;
+      --ink:#eef1fb;
+      --ink-soft:#aab2d6;
+      --line: rgba(255,255,255,0.12);
+      --warn-bg:#3a2a10;
+      --warn-line:#c98a30;
+      --warn-ink:#f0cd93;
+      --good-bg:#0f2c1c;
+      --good-line:#3d8f61;
+      --good-ink:#a8e6bf;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#0e1330;
+    --paper-2:#151b3d;
+    --ink:#eef1fb;
+    --ink-soft:#aab2d6;
+    --line: rgba(255,255,255,0.12);
+    --warn-bg:#3a2a10;
+    --warn-line:#c98a30;
+    --warn-ink:#f0cd93;
+    --good-bg:#0f2c1c;
+    --good-line:#3d8f61;
+    --good-ink:#a8e6bf;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: radial-gradient(120% 140% at 15% -10%, var(--navy-700) 0%, var(--navy-900) 55%, #0c1030 100%);
+    font-family:'Poppins', ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color:var(--ink);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding: 32px 16px 64px;
+  }
+  .stage{
+    width:100%;
+    max-width:640px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+    color: var(--sky-300);
+  }
+  .brand svg{ flex:none; }
+  .brand .word{
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:0.02em;
+    color:#fff;
+  }
+  .brand .tag{
+    font-size:12px;
+    color: var(--sky-300);
+    font-weight:500;
+  }
+
+  .card{
+    background: var(--paper);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    overflow:hidden;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .progress-track{
+    height:4px;
+    background: rgba(255,255,255,0.12);
+    width:100%;
+  }
+  .progress-fill{
+    height:100%;
+    background: linear-gradient(90deg, var(--cyan-500), var(--cyan-400));
+    width:0%;
+    transition: width 0.35s ease;
+  }
+
+  .panel{
+    padding: 34px 30px 30px;
+  }
+  @media (max-width:480px){
+    .panel{ padding: 26px 20px 24px; }
+  }
+
+  .step-label{
+    font-size:13px;
+    color: var(--ink-soft);
+    font-weight:500;
+    margin: 0 0 10px;
+  }
+
+  h1.q{
+    font-size: 23px;
+    line-height:1.35;
+    font-weight:600;
+    margin: 0 0 8px;
+    color: var(--ink);
+    max-width: 30ch;
+  }
+  p.sub{
+    font-size:14.5px;
+    color: var(--ink-soft);
+    line-height:1.55;
+    margin: 0 0 22px;
+    max-width: 46ch;
+  }
+
+  .options{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom: 6px;
+  }
+  .opt-row{ display:flex; gap:10px; }
+  .opt-row .opt-btn{ flex:1; }
+
+  .opt-btn{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    text-align:left;
+    padding:14px 16px;
+    border-radius:12px;
+    border: 1.5px solid var(--line);
+    background: var(--paper-2);
+    color: var(--ink);
+    font-family:inherit;
+    font-size:15px;
+    font-weight:500;
+    cursor:pointer;
+    transition: border-color .15s ease, transform .1s ease, background .15s ease;
+  }
+  .opt-btn:hover{ border-color: var(--cyan-500); background: color-mix(in srgb, var(--cyan-500) 6%, var(--paper-2)); }
+  .opt-btn:active{ transform: scale(0.99); }
+  .opt-btn .arrow{
+    color: var(--cyan-500);
+    font-size:16px;
+    flex:none;
+  }
+
+  select.tier-select{
+    width:100%;
+    padding:14px 16px;
+    border-radius:12px;
+    border: 1.5px solid var(--line);
+    background: var(--paper-2);
+    color: var(--ink);
+    font-family:inherit;
+    font-size:15px;
+    font-weight:500;
+    appearance:none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'><path d='M1 1L7 7L13 1' stroke='%23149dd7' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat;
+    background-position: right 16px center;
+    margin-bottom:18px;
+  }
+
+  .primary-btn{
+    width:100%;
+    padding:15px 18px;
+    border-radius:12px;
+    border:none;
+    background: linear-gradient(90deg, var(--cyan-500), var(--cyan-400));
+    color:#04182b;
+    font-family:inherit;
+    font-weight:600;
+    font-size:15.5px;
+    cursor:pointer;
+    transition: filter .15s ease, transform .1s ease;
+  }
+  a.primary-btn{
+    display:block;
+    text-decoration:none;
+    text-align:center;
+    box-sizing:border-box;
+  }
+  .primary-btn:hover{ filter:brightness(1.06); }
+  .primary-btn:active{ transform: scale(0.99); }
+  .primary-btn:disabled{ opacity:0.45; cursor:not-allowed; }
+
+  .ghost-btn{
+    background:none;
+    border:none;
+    color: var(--ink-soft);
+    font-family:inherit;
+    font-size:13.5px;
+    cursor:pointer;
+    padding:8px 0;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .ghost-btn:hover{ color: var(--cyan-500); }
+
+  .foot-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:18px;
+  }
+
+  /* results */
+  .result-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:7px 14px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+    margin-bottom:16px;
+  }
+  .badge-hdhp{ background: var(--good-bg); color: var(--good-ink); border:1px solid var(--good-line); }
+  .badge-basic{ background: color-mix(in srgb, var(--cyan-500) 14%, transparent); color: var(--cyan-500); border:1px solid var(--cyan-500); }
+  .badge-close{ background: var(--warn-bg); color: var(--warn-ink); border:1px solid var(--warn-line); }
+
+  h2.result-title{
+    font-size:24px;
+    font-weight:700;
+    margin:0 0 6px;
+    line-height:1.3;
+  }
+  p.result-sub{
+    color:var(--ink-soft);
+    font-size:14.5px;
+    margin:0 0 20px;
+    line-height:1.55;
+  }
+
+  .stat-row{
+    display:flex;
+    gap:12px;
+    margin-bottom:20px;
+  }
+  .stat-box{
+    flex:1;
+    background: var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:12px;
+    padding:14px 14px;
+  }
+  .stat-box .stat-label{
+    font-size:11.5px;
+    color:var(--ink-soft);
+    font-weight:500;
+    margin-bottom:4px;
+  }
+  .stat-box .stat-value{
+    font-size:19px;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .stat-box .stat-value.plus{ color: var(--good-ink); }
+  .stat-box .stat-value.minus{ color: var(--warn-ink); }
+  .stat-box .stat-note{
+    font-size:11px;
+    color: var(--ink-soft);
+    line-height:1.4;
+    margin-top:5px;
+  }
+
+  .reason-list{
+    list-style:none;
+    margin:0 0 22px;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+  }
+  .reason-list li{
+    display:flex;
+    gap:10px;
+    font-size:14.5px;
+    line-height:1.5;
+    color: var(--ink);
+    background: var(--paper-2);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:12px 14px;
+  }
+  .reason-list li .dot{
+    flex:none;
+    width:7px; height:7px;
+    border-radius:50%;
+    background: var(--cyan-500);
+    margin-top:7px;
+  }
+  .reason-list li.warn .dot{ background: var(--warn-line); }
+
+  .callout{
+    background: var(--warn-bg);
+    border:1px solid var(--warn-line);
+    border-radius:12px;
+    padding:14px 16px;
+    font-size:14px;
+    line-height:1.55;
+    color: var(--warn-ink);
+    margin-bottom:20px;
+  }
+  .callout strong{ display:block; margin-bottom:4px; font-size:13.5px; }
+
+  table.tier-table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom: 22px;
+    font-size:13.5px;
+  }
+  table.tier-table th, table.tier-table td{
+    padding:9px 8px;
+    text-align:right;
+    border-bottom:1px solid var(--line);
+    white-space:nowrap;
+  }
+  table.tier-table th:first-child, table.tier-table td:first-child{ text-align:left; }
+  table.tier-table thead th{
+    color: var(--ink-soft);
+    font-weight:500;
+    font-size:11.5px;
+  }
+  table.tier-table tbody tr.me{
+    background: color-mix(in srgb, var(--cyan-500) 10%, transparent);
+  }
+  table.tier-table tbody tr.me td:first-child{ font-weight:600; color: var(--cyan-500); }
+  .table-wrap{ overflow-x:auto; margin: 0 -2px 22px; }
+
+  .compare-title{
+    font-size:15px;
+    font-weight:600;
+    margin: 26px 0 4px;
+    color: var(--ink);
+  }
+  .compare-sub{
+    font-size:13.5px;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    line-height:1.5;
+  }
+  table.compare-table{
+    width:100%;
+    border-collapse: separate;
+    border-spacing: 0 6px;
+    font-size:13px;
+    margin-bottom: 8px;
+  }
+  table.compare-table th{
+    text-align:left;
+    font-size:11.5px;
+    font-weight:600;
+    color: var(--ink-soft);
+    padding: 0 10px 6px;
+  }
+  table.compare-table th:first-child{ width:26%; }
+  table.compare-table td{
+    vertical-align:top;
+    padding: 10px 10px;
+    background: var(--paper-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    line-height:1.45;
+  }
+  table.compare-table td:first-child{
+    border-left: 1px solid var(--line);
+    border-radius: 10px 0 0 10px;
+    font-weight:600;
+    color: var(--ink);
+    width:26%;
+  }
+  table.compare-table td:last-child{
+    border-right: 1px solid var(--line);
+    border-radius: 0 10px 10px 0;
+  }
+  table.compare-table td.cell-good{
+    background: var(--good-bg);
+    color: var(--good-ink);
+    border-color: var(--good-line);
+  }
+  table.compare-table td.cell-warn{
+    background: var(--warn-bg);
+    color: var(--warn-ink);
+    border-color: var(--warn-line);
+  }
+
+  .hsa-callout{
+    background: var(--good-bg);
+    border: 1px solid var(--good-line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+  }
+  .hsa-callout strong{
+    display:block;
+    font-size:14px;
+    color: var(--good-ink);
+    margin-bottom:6px;
+  }
+  .hsa-callout p{
+    font-size:13.5px;
+    line-height:1.6;
+    color: var(--good-ink);
+    margin:0;
+  }
+
+  .disclaimer{
+    font-size:12px;
+    color: var(--ink-soft);
+    line-height:1.6;
+    border-top:1px solid var(--line);
+    padding-top:16px;
+    margin-top:4px;
+  }
+
+  .restart-btn{
+    width:100%;
+    padding:13px 18px;
+    border-radius:12px;
+    border:1.5px solid var(--line);
+    background:transparent;
+    color: var(--ink);
+    font-family:inherit;
+    font-weight:500;
+    font-size:14.5px;
+    cursor:pointer;
+    margin-top:6px;
+  }
+  .restart-btn:hover{ border-color: var(--cyan-500); color: var(--cyan-500); }
+
+  .visually-hidden{
+    position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .progress-fill, .opt-btn, .primary-btn{ transition:none; }
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <div class="brand">
+    <svg width="26" height="30" viewBox="0 0 26 30" fill="none">
+      <path d="M13 0L25 5V14C25 22 19.5 27.5 13 30C6.5 27.5 1 22 1 14V5L13 0Z" fill="#149dd7"/>
+      <path d="M13 3.3L22 7V14C22 20.5 17.8 25 13 27C8.2 25 4 20.5 4 14V7L13 3.3Z" fill="#0D2D5E"/>
+      <path d="M8.5 14.5L11.5 17.5L18 10.5" stroke="#8aceeb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div>
+      <div class="word">OKPreMed</div>
+      <div class="tag">Pre-Med Defender pairing guide</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="panel" id="panel"></div>
+  </div>
+</div>
+
+<script>
+(function(){
+
+  // ---- Data: tier -> {savings, exposure} ----
+  const TIERS = {
+    employee:            { label: "Employee",                 savings: 1544, exposure: 2000, hasSpouse:false, isFamily:false },
+    ee_spouse:           { label: "EE + Spouse",               savings: 3879, exposure: 4000, hasSpouse:true,  isFamily:true  },
+    ee_child:            { label: "EE + Child",                savings: 2343, exposure: 4000, hasSpouse:false, isFamily:true  },
+    ee_children:         { label: "EE + Children",             savings: 2696, exposure: 4000, hasSpouse:false, isFamily:true  },
+    ee_spouse_child:      { label: "EE + Spouse + Child",       savings: 4993, exposure: 4000, hasSpouse:true,  isFamily:true  },
+    ee_spouse_children:   { label: "EE + Spouse + Children",    savings: 5343, exposure: 4000, hasSpouse:true,  isFamily:true  },
+  };
+
+  const state = {
+    step: "intro",
+    answers: {}
+  };
+
+  const panel = document.getElementById("panel");
+  const progressFill = document.getElementById("progressFill");
+
+  const STEP_ORDER = ["intro","tier","employment","medicare","spouseFsa","dependent","agency","rx","procedures","cashflow","hsaUse","result"];
+
+  function progressFor(step){
+    const idx = STEP_ORDER.indexOf(step);
+    if (idx < 0) return 100;
+    return Math.round((idx / (STEP_ORDER.length - 1)) * 100);
+  }
+
+  function fmt(n){
+    return "$" + n.toLocaleString("en-US");
+  }
+
+  function go(step){
+    state.step = step;
+    progressFill.style.width = progressFor(step) + "%";
+    render();
+    panel.scrollIntoView({behavior:"smooth", block:"start"});
+  }
+
+  function backButton(prevStep){
+    return `<button class="ghost-btn" onclick="__go('${prevStep}')">&larr; Back</button>`;
+  }
+
+  // expose for inline onclick
+  window.__go = go;
+  window.__answer = answer;
+  window.__restart = restart;
+
+  function answer(key, value, next){
+    state.answers[key] = value;
+    go(next);
+  }
+
+  function restart(){
+    state.answers = {};
+    go("tier");
+  }
+
+  function render(){
+    const s = state.step;
+    if (s === "intro") return renderIntro();
+    if (s === "tier") return renderTier();
+    if (s === "employment") return renderEmployment();
+    if (s === "medicare") return renderMedicare();
+    if (s === "spouseFsa") return renderSpouseFsa();
+    if (s === "dependent") return renderDependent();
+    if (s === "agency") return renderAgency();
+    if (s === "rx") return renderRx();
+    if (s === "procedures") return renderProcedures();
+    if (s === "cashflow") return renderCashflow();
+    if (s === "hsaUse") return renderHsaUse();
+    if (s === "result") return renderResult();
+  }
+
+  function nextAfterDisqualifyCheck(fromStep){
+    // called after medicare/spouseFsa/dependent answered "no" — figure out next screening step
+    if (fromStep === "medicare"){
+      const tier = TIERS[state.answers.tier];
+      if (tier.hasSpouse) return "spouseFsa";
+      return "dependent";
+    }
+    if (fromStep === "spouseFsa") return "dependent";
+    if (fromStep === "dependent") return "agency";
+  }
+
+  // ---- Step renderers ----
+
+  function renderIntro(){
+    panel.innerHTML = `
+      <p class="step-label">Before you begin</p>
+      <h1 class="q">This guide helps you decide — it doesn't decide for you.</h1>
+      <p class="sub">A few quick questions about your household, health needs, and finances, weighed against the specific premium savings and deductible exposure for your coverage tier.</p>
+      <div class="callout">
+        <strong>Please read before continuing</strong>
+        The questions and recommendation here are intended to help you think through the tradeoffs between the Basic and HDHP pairings with Pre-Med Defender. They are not a determination of which plan is right for you, and they don't replace the official HealthChoice and PMD plan documents, which govern actual eligibility and benefits. Where the numbers are genuinely close, this guide defaults to the more conservative option. You know your own health needs, cash flow, and risk tolerance better than any guide can — please confirm your choice with your benefits office or a tax advisor before enrolling.
+      </div>
+      <button class="primary-btn" onclick="__go('tier')">Get started</button>
+    `;
+  }
+
+  function renderTier(){
+    const opts = Object.entries(TIERS).map(([k,v]) =>
+      `<option value="${k}" ${state.answers.tier===k?"selected":""}>${v.label}</option>`
+    ).join("");
+    panel.innerHTML = `
+      <p class="step-label">Before we start</p>
+      <h1 class="q">Which coverage tier are you enrolling in?</h1>
+      <p class="sub">This determines your specific premium savings and worst-case deductible exposure under HDHP + PMD.</p>
+      <select class="tier-select" id="tierSelect">
+        <option value="" disabled ${!state.answers.tier?"selected":""}>Select a tier&hellip;</option>
+        ${opts}
+      </select>
+      <button class="primary-btn" id="tierNext" ${!state.answers.tier?"disabled":""}>Continue</button>
+    `;
+    panel.insertAdjacentHTML("beforeend", `<div class="foot-row">${backButton('intro')}</div>`);
+    const sel = document.getElementById("tierSelect");
+    const btn = document.getElementById("tierNext");
+    sel.addEventListener("change", () => {
+      state.answers.tier = sel.value;
+      btn.disabled = !sel.value;
+    });
+    btn.addEventListener("click", () => {
+      if (state.answers.tier) go("employment");
+    });
+  }
+
+  function renderEmployment(){
+    panel.innerHTML = `
+      <p class="step-label">Question 1 of 9</p>
+      <h1 class="q">Are you an active employee or a retiree?</h1>
+      <p class="sub">Some of what follows lands differently for retirees, especially around Medicare.</p>
+      <div class="options">
+        <button class="opt-btn" onclick="__answer('employment','active','medicare')">Active employee <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('employment','retiree','medicare')">Retiree <span class="arrow">&rarr;</span></button>
+      </div>
+      <div class="foot-row">${backButton('tier')}</div>
+    `;
+  }
+
+  function renderMedicare(){
+    const q = state.answers.employment === "retiree"
+      ? "Are you (or your spouse, if you're covering them) enrolled in Medicare Part A or B, TRICARE, or have you used VA medical benefits in the last 3 months?"
+      : "Are you (or your spouse, if covering them) enrolled in Medicare Part A or B, TRICARE, or have you used VA medical benefits in the last 3 months?";
+    const noNext = nextAfterDisqualifyCheck('medicare');
+    panel.innerHTML = `
+      <p class="step-label">Question 2 of 9</p>
+      <h1 class="q">${q}</h1>
+      <p class="sub">Any of these makes you ineligible to contribute to an HSA — which is the whole engine behind the HDHP pairing's value.</p>
+      <div class="options">
+        <button class="opt-btn" onclick="__answer('medicare',true,'result')">Yes <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('medicare',false,'${noNext}')">No <span class="arrow">&rarr;</span></button>
+      </div>
+      <div class="foot-row">${backButton('employment')}</div>
+    `;
+  }
+
+  function renderSpouseFsa(){
+    panel.innerHTML = `
+      <p class="step-label">Question 3 of 9</p>
+      <h1 class="q">Does your spouse have a general-purpose health FSA through their employer?</h1>
+      <p class="sub">A spouse's general-purpose FSA also disqualifies you from HSA contributions, even if you'd otherwise qualify.</p>
+      <div class="options">
+        <button class="opt-btn" onclick="__answer('spouseFsa',true,'result')">Yes <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('spouseFsa',false,'dependent')">No <span class="arrow">&rarr;</span></button>
+      </div>
+      <div class="foot-row">${backButton('medicare')}</div>
+    `;
+  }
+
+  function renderDependent(){
+    panel.innerHTML = `
+      <p class="step-label">Question 4 of 9</p>
+      <h1 class="q">Can anyone claim you as a dependent on their tax return?</h1>
+      <p class="sub">This also rules out HSA eligibility.</p>
+      <div class="options">
+        <button class="opt-btn" onclick="__answer('dependent',true,'result')">Yes <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('dependent',false,'agency')">No <span class="arrow">&rarr;</span></button>
+      </div>
+      <div class="foot-row">${backButton( TIERS[state.answers.tier].hasSpouse ? 'spouseFsa' : 'medicare')}</div>
+    `;
+  }
+
+  function renderAgency(){
+    panel.innerHTML = `
+      <p class="step-label">Question 5 of 9</p>
+      <h1 class="q">Are you a state agency employee or a school / education employee?</h1>
+      <p class="sub">Benefit allowance mechanics differ between the two — this doesn't change the HDHP-vs-Basic math, just how the premium is funded.</p>
+      <div class="options">
+        <button class="opt-btn" onclick="__answer('agency','agency','rx')">State agency <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('agency','school','rx')">School / education <span class="arrow">&rarr;</span></button>
+      </div>
+      <div class="foot-row">${backButton('dependent')}</div>
+    `;
+  }
+
+  function renderRx(){
+    panel.innerHTML = `
+      <p class="step-label">Question 6 of 9 &middot; You clear the HSA screen</p>
+      <h1 class="q">Does anyone on the plan take a brand-name or specialty maintenance drug?</h1>
+      <p class="sub">Under HDHP, you must meet the full combined medical + Rx deductible before any pharmacy benefits kick in. Under Basic, only a small $100/$300 pharmacy deductible applies before copays start. PMD doesn't cover Rx either way.</p>
+      <div class="options">
+        <button class="opt-btn" onclick="__answer('rx',true,'result')">Yes <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('rx',false,'procedures')">No <span class="arrow">&rarr;</span></button>
+      </div>
+      <div class="foot-row">${backButton('agency')}</div>
+    `;
+  }
+
+  function renderProcedures(){
+    panel.innerHTML = `
+      <p class="step-label">Question 7 of 9</p>
+      <h1 class="q">How would you describe your expected medical care this year?</h1>
+      <p class="sub">Be honest with yourself here — this is the single biggest factor in whether HDHP's savings end up ahead of Basic's.</p>
+      <div class="options">
+        <button class="opt-btn" onclick="__answer('usage','low','cashflow')">Mostly just annual checkups and routine care <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('usage','average','cashflow')">A handful of visits or prescriptions, nothing major planned <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('usage','high','cashflow')">Planned procedures, surgery, or ongoing specialist care <span class="arrow">&rarr;</span></button>
+      </div>
+      <div class="foot-row">${backButton('rx')}</div>
+    `;
+  }
+
+  function renderCashflow(){
+    const tier = TIERS[state.answers.tier];
+    panel.innerHTML = `
+      <p class="step-label">Question 8 of 9</p>
+      <h1 class="q">Could you cover ${fmt(tier.exposure)} in out-of-pocket cost if it landed in the first few months of the year?</h1>
+      <p class="sub">HDHP's premium savings arrive monthly. The deductible exposure can show up in January, before those savings have added up.</p>
+      <div class="options">
+        <button class="opt-btn" onclick="__answer('cashflow',true,'hsaUse')">Yes, that's manageable <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('cashflow',false,'hsaUse')">No, that would be tight <span class="arrow">&rarr;</span></button>
+      </div>
+      <div class="foot-row">${backButton('procedures')}</div>
+    `;
+  }
+
+  function renderHsaUse(){
+    panel.innerHTML = `
+      <p class="step-label">Question 9 of 9</p>
+      <h1 class="q">Do you currently max out, or come close to maxing out, a health FSA or HSA?</h1>
+      <p class="sub">One thing worth knowing either way: unlike an FSA, unused HSA dollars never expire — they roll over and keep growing year after year, even if you switch plans or retire.</p>
+      <div class="options">
+        <button class="opt-btn" onclick="__answer('hsaUse',true,'result')">Yes <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('hsaUse',false,'result')">No <span class="arrow">&rarr;</span></button>
+      </div>
+      <div class="foot-row">${backButton('cashflow')}</div>
+    `;
+  }
+
+  // ---- Result logic ----
+
+  function computeRecommendation(){
+    const a = state.answers;
+    const tier = TIERS[a.tier];
+    const net = tier.savings - tier.exposure; // positive = HDHP wins even in worst case
+
+    // Screening disqualification
+    if (a.medicare === true || a.spouseFsa === true || a.dependent === true){
+      const reasons = [];
+      if (a.medicare === true){
+        reasons.push(a.employment === "retiree"
+          ? "Medicare, TRICARE, or recent VA care makes you HSA-ineligible — and for a retiree, enrolling in HDHP without HSA eligibility is a genuinely costly combination, since you'd take on the higher deductible with none of the tax-advantaged offset."
+          : "Medicare, TRICARE, or VA medical use in the last 3 months makes you ineligible to contribute to an HSA, which removes most of HDHP's advantage.");
+      }
+      if (a.spouseFsa === true){
+        reasons.push("A spouse's general-purpose health FSA also disqualifies you from HSA contributions, even though the FSA itself belongs to them.");
+      }
+      if (a.dependent === true){
+        reasons.push("Being claimed as a dependent on someone else's tax return rules out HSA eligibility on your own coverage.");
+      }
+      reasons.push("Without HSA eligibility, HDHP + PMD loses the piece that makes its higher deductible worth taking on. Basic + PMD is the straightforward fit.");
+      return {
+        verdict: "basic",
+        headline: "Basic + PMD is the fit here",
+        sub: "You're not eligible to contribute to an HSA, which is the main thing that makes the HDHP pairing pay off.",
+        reasons: reasons.map(r => ({text:r, warn:true})),
+        showTable: false
+      };
+    }
+
+    // Rx exception
+    if (a.rx === true){
+      const reasons = [
+        `${fmt(tier.savings)} in annual premium savings is real money, but under HDHP the full ${fmt(tier.exposure)} combined medical-and-pharmacy deductible has to be met before any Rx benefit applies — and PMD doesn't cover prescriptions under either pairing.`,
+        "Under Basic, only a $100 individual / $300 family pharmacy deductible stands before copays kick in, so a brand-name or specialty drug stays predictable month to month.",
+        "For a household with ongoing prescription costs, that predictability usually outweighs the premium savings, regardless of tier."
+      ];
+      return {
+        verdict: "basic",
+        headline: "Basic + PMD is the safer fit",
+        sub: "The prescription drug exception applies here, and it isn't reflected in the premium-savings math.",
+        reasons: reasons.map(r => ({text:r, warn:true})),
+        showTable: true
+      };
+    }
+
+    // Worst-case math: HDHP wins outright
+    if (net >= 0){
+      const reasons = [
+        `On the ${tier.label} tier, HDHP + PMD saves ${fmt(tier.savings)} a year in premium — more than the ${fmt(tier.exposure)} maximum extra deductible exposure. Even in a worst-case year where the deductible is fully met, you still come out ${fmt(net)} ahead.`,
+        "That math already accounts for the worst case, so the usual utilization questions matter less here.",
+        "Those savings can go straight into an HSA — and unlike an FSA, unused HSA dollars roll over and keep growing year after year instead of resetting to zero."
+      ];
+      if (a.cashflow === false){
+        reasons.push({text:`One caution: you mentioned covering ${fmt(tier.exposure)} up front would be tight. The annual math favors HDHP, but if a large bill lands in January before the monthly savings accumulate, that's a real cash-flow squeeze to plan for — consider setting aside part of each paycheck's savings into the HSA as a cushion.`, warn:true});
+      }
+      if (tier.isFamily){
+        reasons.push({text:"Because this is a family tier, remember HealthChoice's HDHP deductible is aggregate: no one on the plan sees a dollar of benefit until the full family deductible is met in total — not per person.", warn:true});
+      }
+      return {
+        verdict: "hdhp",
+        headline: "HDHP + PMD comes out ahead",
+        sub: `On the ${tier.label} tier, the premium savings beat the maximum extra deductible exposure — even in a worst-case year.`,
+        reasons,
+        showTable: true
+      };
+    }
+
+    // Close call — general health / utilization carries the most weight,
+    // since a healthy, low-utilization member is exactly who HDHP + HSA is built for.
+    // usage: low +2, average 0, high -2. cashflow: manageable +1, tight -1.
+    let score = 0;
+    const reasons = [];
+
+    if (a.usage === "low"){
+      score += 2;
+      reasons.push({text:"You're expecting mostly routine care — that's the profile HDHP is built for. Low utilization means you're unlikely to come close to the deductible most years, so the premium savings are yours to keep."});
+    } else if (a.usage === "average"){
+      reasons.push({text:"You're expecting light, non-major care. That's a reasonable middle ground — you may or may not approach the deductible, so the other factors here matter more for you."});
+    } else {
+      score -= 2;
+      reasons.push({text:"You're expecting planned procedures or ongoing specialist care, which makes it considerably more likely you'll reach the deductible under HDHP this year.", warn:true});
+    }
+
+    if (a.cashflow === true){
+      score += 1;
+      reasons.push({text:`You could manage ${fmt(tier.exposure)} in out-of-pocket cost if it came up early in the year, which takes the cash-flow risk off the table.`});
+    } else {
+      score -= 1;
+      reasons.push({text:`Covering ${fmt(tier.exposure)} up front would be tight for you. HDHP's savings arrive monthly, so a big early-year bill can be a real squeeze — building a small HSA cushion from each paycheck can help offset this over time.`, warn:true});
+    }
+
+    reasons.push({text: a.hsaUse
+      ? "You already value tax-advantaged saving, so HDHP lets you keep building on that — HSA dollars roll over indefinitely, unlike an FSA's use-it-or-lose-it rule."
+      : "If you haven't used an HSA before, this is a low-risk way to start: unlike an FSA, unused HSA dollars never expire — they roll over and keep growing year after year, even into retirement."
+    });
+
+    if (tier.isFamily){
+      reasons.push({text:"Because this is a family tier, HealthChoice's HDHP deductible is aggregate: no one benefits until the full family deductible is met in total, not per person — worth weighing before leaning HDHP on this tier.", warn:true});
+    }
+
+    let verdict, headline, sub;
+    if (score >= 0){
+      verdict = "hdhp";
+      headline = "Leans HDHP + PMD";
+      sub = `On the ${tier.label} tier, the ${fmt(tier.savings)} premium savings don't fully cover the ${fmt(tier.exposure)} worst-case exposure on paper — but your expected usage and situation point toward HDHP being the better fit in practice.`;
+    } else {
+      verdict = "basic";
+      headline = "Leans Basic + PMD";
+      sub = `On the ${tier.label} tier, the ${fmt(tier.savings)} premium savings fall short of the ${fmt(tier.exposure)} worst-case exposure, and your expected usage and situation point toward feeling that gap rather than avoiding it.`;
+    }
+
+    return { verdict, headline, sub, reasons, showTable: true, isCloseCall: true };
+  }
+
+  function renderResult(){
+    const tier = TIERS[state.answers.tier];
+    const r = computeRecommendation();
+
+    const badgeClass = r.verdict === "hdhp" ? "badge-hdhp" : r.verdict === "basic" ? "badge-basic" : "badge-close";
+    const badgeText = r.verdict === "hdhp" ? "Suggests: HDHP + PMD" : r.verdict === "basic" ? "Suggests: Basic + PMD" : "Genuinely close";
+
+    const net = tier.savings - tier.exposure; // positive = ahead even worst-case
+    const worstCaseOOP = Math.max(0, tier.exposure - tier.savings); // true max you could still be out, after savings
+    const aheadAmount = Math.max(0, net);
+
+    let tableRows = "";
+    Object.entries(TIERS).forEach(([k,v]) => {
+      const isMe = k === state.answers.tier;
+      const rowOOP = Math.max(0, v.exposure - v.savings);
+      const rowAhead = Math.max(0, v.savings - v.exposure);
+      tableRows += `<tr class="${isMe?'me':''}">
+        <td>${v.label}${isMe ? " (you)" : ""}</td>
+        <td>${fmt(v.savings)}</td>
+        <td>${fmt(v.exposure)}</td>
+        <td>${rowOOP > 0 ? fmt(rowOOP) : `$0 (+${fmt(rowAhead)} ahead)`}</td>
+      </tr>`;
+    });
+
+    const reasonsHtml = r.reasons.map(item => {
+      const obj = typeof item === "string" ? {text:item, warn:false} : item;
+      return `<li class="${obj.warn?'warn':''}"><span class="dot"></span><span>${obj.text}</span></li>`;
+    }).join("");
+
+    const compareRows = [
+      { label: "Monthly premium",            basic: "Higher — no premium savings",                                                  hdhp: "Lower — frees up cash every paycheck" },
+      { label: "Deductible before benefits",  basic: "Standard HealthChoice Basic deductible applies as usual",                     hdhp: `Full ${fmt(tier.exposure)} combined medical + Rx deductible must be met first`, hdhpWarn:true },
+      { label: "Prescription costs",          basic: "$100 individual / $300 family Rx deductible, then copays",                    hdhp: "Full price until the combined deductible is met — PMD doesn't cover Rx either way", hdhpWarn:true },
+      { label: "Early-year cash-flow risk",   basic: "Low — costs are predictable month to month",                                  hdhp: "Higher — a big bill can land before monthly savings add up", hdhpWarn:true },
+      { label: "HSA eligibility",             basic: "Not applicable",                                                              hdhp: "Eligible (once you clear HSA screening) — opens a tax-advantaged account", hdhpGood:true },
+      { label: "Unused funds at year-end",    basic: "No linked savings account",                                                   hdhp: "Roll over indefinitely and keep growing — never expire like FSA funds", hdhpGood:true },
+      { label: "Tax treatment",               basic: "Not applicable",                                                              hdhp: "Contributions, growth, and qualified withdrawals are all tax-free", hdhpGood:true },
+      { label: "Best fit for",                basic: "Predictable costs, or meaningful expected medical / Rx usage",                hdhp: "Generally healthy members who want to build long-term savings" },
+    ];
+    const compareRowsHtml = compareRows.map(row => `
+      <tr>
+        <td>${row.label}</td>
+        <td>${row.basic}</td>
+        <td class="${row.hdhpGood?'cell-good':row.hdhpWarn?'cell-warn':''}">${row.hdhp}</td>
+      </tr>
+    `).join("");
+
+    const compareHtml = r.isCloseCall ? `
+      <p class="compare-title">Basic + PMD vs. HDHP + PMD, side by side</p>
+      <p class="compare-sub">Since the premium savings and deductible exposure are close on this tier, here's how the two pairings actually compare.</p>
+      <div class="table-wrap">
+        <table class="compare-table">
+          <thead><tr><th></th><th>Basic + PMD</th><th>HDHP + PMD</th></tr></thead>
+          <tbody>${compareRowsHtml}</tbody>
+        </table>
+      </div>
+      <div class="hsa-callout">
+        <strong>Why the HSA is worth a second look</strong>
+        <p>An HSA is the only account that's tax-deductible going in, grows tax-free, and comes out tax-free for qualified medical expenses — a triple tax advantage no FSA or standard savings account offers. Nothing is forfeited at year-end: unused dollars stay yours and keep compounding, year after year. After age 65, the account can also be used like a retirement fund for non-medical expenses. For a generally healthy member, this year's premium savings can become the start of a meaningful long-term asset — not just a lower bill.</p>
+      </div>
+    ` : "";
+
+    panel.innerHTML = `
+      <span class="result-badge ${badgeClass}">${badgeText}</span>
+      <h2 class="result-title">${r.headline}</h2>
+      <p class="result-sub">${r.sub}</p>
+
+      ${r.showTable ? `
+      <div class="stat-row">
+        <div class="stat-box">
+          <div class="stat-label">Annual premium savings (HDHP)</div>
+          <div class="stat-value">${fmt(tier.savings)}</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Max deductible exposure</div>
+          <div class="stat-value">${fmt(tier.exposure)}</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-label">Max out-of-pocket after savings</div>
+          <div class="stat-value ${worstCaseOOP>0?'minus':'plus'}">${worstCaseOOP>0 ? fmt(worstCaseOOP) : "$0"}</div>
+          <div class="stat-note">${worstCaseOOP>0
+            ? "The most you'd still pay beyond your premium savings, even in a worst-case year."
+            : `Savings fully cover the deductible — you'd come out ${fmt(aheadAmount)} ahead even in the worst case.`}</div>
+        </div>
+      </div>` : ""}
+
+      <ul class="reason-list">${reasonsHtml}</ul>
+
+      ${compareHtml}
+
+      ${r.showTable ? `
+      <div class="table-wrap">
+        <table class="tier-table">
+          <thead><tr><th>Tier</th><th>HDHP savings</th><th>Max exposure</th><th>Max OOP after savings</th></tr></thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>` : ""}
+
+      <div class="callout">
+        <strong>This tool helps you think it through — it doesn't choose for you</strong>
+        This guide is intended to help you weigh the tradeoffs; it does not determine, recommend, or select a plan on your behalf, and it isn't a substitute for the official plan documents. Your actual eligibility and benefits are governed by HealthChoice and PMD plan rules, not by this tool. Enrollment is your decision — please confirm details with your benefits office or a tax advisor, especially around HSA eligibility, before you enroll.
+      </div>
+
+      <a class="primary-btn" href="https://okpremed.com/wp-content/uploads/2026/09/2027-Enrollment-Guide_web.pdf" target="_blank" rel="noopener">Download the 2027 Enrollment Guide</a>
+      <button class="restart-btn" onclick="__restart()">Start over</button>
+    `;
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
