@@ -676,11 +676,12 @@
   function renderAgency(){
     panel.innerHTML = `
       <p class="step-label">Question 5 of 9</p>
-      <h1 class="q">Are you a state agency employee or a school / education employee?</h1>
-      <p class="sub">Benefit allowance mechanics differ between the two — this doesn't change the HDHP-vs-Basic math, just how the premium is funded.</p>
+      <h1 class="q">Which best describes your employer?</h1>
+      <p class="sub">This covers state agencies, schools, career/tech centers, counties, and any other entity with access to HealthChoice health plans. Benefit allowance mechanics differ by employer type, but this doesn't change the HDHP-vs-Basic math — just how the premium is funded.</p>
       <div class="options">
         <button class="opt-btn" onclick="__answer('agency','agency','rx')">State agency <span class="arrow">&rarr;</span></button>
-        <button class="opt-btn" onclick="__answer('agency','school','rx')">School / education <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('agency','school','rx')">School, tech center, or county <span class="arrow">&rarr;</span></button>
+        <button class="opt-btn" onclick="__answer('agency','other','rx')">Other HealthChoice-eligible employer <span class="arrow">&rarr;</span></button>
       </div>
       <div class="foot-row">${backButton('dependent')}</div>
     `;
