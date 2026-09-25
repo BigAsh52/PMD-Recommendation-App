@@ -800,6 +800,9 @@
       if (tier.isFamily){
         reasons.push({text:"Because this is a family tier, remember HealthChoice's HDHP deductible is aggregate: no one on the plan sees a dollar of benefit until the full family deductible is met in total — not per person.", warn:true});
       }
+      if (a.cashflow === false || tier.isFamily){
+        reasons.push({text:`Taken together: none of this changes the bottom line — the ${fmt(tier.savings)} in savings beats the ${fmt(tier.exposure)} worst-case exposure on this tier regardless, so HDHP + PMD still comes out ahead even accounting for the caution above.`});
+      }
       return {
         verdict: "hdhp",
         headline: "HDHP + PMD comes out ahead",
@@ -851,6 +854,18 @@
       verdict = "basic";
       headline = "Leans Basic + PMD";
       sub = `On the ${tier.label} tier, the ${fmt(tier.savings)} premium savings fall short of the ${fmt(tier.exposure)} worst-case exposure, and your expected usage and situation point toward feeling that gap rather than avoiding it.`;
+    }
+
+    // Reconcile: if any individual bullet above cuts against the overall verdict
+    // (e.g. tight cash flow flagged even though the verdict still leans HDHP),
+    // say explicitly why the verdict still stands so the recommendation and the
+    // supporting detail never read as contradicting each other.
+    const hasWarnBullet = reasons.some(r => r.warn);
+    if (hasWarnBullet){
+      reasons.push({text: verdict === "hdhp"
+        ? "Taken together: even with the caution noted above, your expected usage is the dominant factor here, and it's enough to still tip this toward HDHP + PMD overall."
+        : "Taken together: even with the upside noted above, your expected usage and situation are the dominant factors here, and they're enough to still tip this toward Basic + PMD overall."
+      });
     }
 
     return { verdict, headline, sub, reasons, showTable: true, isCloseCall: true };
